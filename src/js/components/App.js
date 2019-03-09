@@ -9,8 +9,8 @@ export default class App extends Component {
   render () {
     return (
       <div className='root'>
-        <Header title={TEXT.title} subtitle={TEXT.subtitle} />
-        <MapView />
+        <Header title={TEXT.title} subtitle={TEXT.subtitle}/>
+        <MapView/>
       </div>
     );
   }
