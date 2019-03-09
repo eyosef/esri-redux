@@ -55,7 +55,7 @@
     "autoprefixer": "^7.1.4",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
-    "babel-jest": "^21.2.0",
+    "babel-jest": "^24.3.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-es2015-modules-amd": "^6.24.1",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -73,8 +73,8 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
-    "image-webpack-loader": "^3.4.2",
-    "jest": "^21.2.0",
+    "image-webpack-loader": "^4.6.0",
+    "jest": "^24.3.1",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "react-addons-test-utils": "^15.6.2",
@@ -83,7 +83,7 @@
     "requirejs": "^2.3.5",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
-    "url-loader": "^0.5.9",
+    "url-loader": "^1.1.2",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.19.1"
   }
