@@ -25,7 +25,7 @@ export default class Map extends Component {
     this.state = {
       popValue: 2,
       highWayValue: 50,
-      popSquareMile: 1,
+      popSquareMile: 2,
       layer: new MapImageLayer({
         url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer',
         sublayers: [
@@ -147,40 +147,42 @@ export default class Map extends Component {
           <LocateModal visible={locateModalVisible} />
         </div>
 
-        <div className='sqmi-footer'>
-          <h4>States with > {this.state.popSquareMile} people per sq mi</h4>
-          <Slider
-            classes={{ slider }}
-            value={this.state.popSquareMile}
-            min={2}
-            max={300}
-            step={1}
-            onChange={this.handlePopSqMileChange}
-          />
-        </div>
+        <div className='switch-wrapper'>
+          <div className='sqmi-footer'>
+            <h4>States with > {this.state.popSquareMile} people per sq mi</h4>
+            <Slider
+              classes={{ slider }}
+              value={this.state.popSquareMile}
+              min={2}
+              max={300}
+              step={1}
+              onChange={this.handlePopSqMileChange}
+            />
+          </div>
 
-        <div className='footer'>
-          <h4>City populations > {this.state.popValue} people</h4>
-          <Slider
-            classes={{ slider }}
-            value={this.state.popValue}
-            min={2}
-            max={500000}
-            step={1}
-            onChange={this.handlePopChange}
-          />
-        </div>
+          <div className='footer'>
+            <h4>City populations > {this.state.popValue} people</h4>
+            <Slider
+              classes={{ slider }}
+              value={this.state.popValue}
+              min={2}
+              max={500000}
+              step={1}
+              onChange={this.handlePopChange}
+            />
+          </div>
 
-        <div className='highway-footer'>
-          <h4>Highways greater than {this.state.highWayValue} miles</h4>
-          <Slider
-            classes={{ slider }}
-            value={this.state.highWayValue}
-            min={50}
-            max={300}
-            step={1}
-            onChange={this.handleHighWayChange}
-          />
+          <div className='highway-footer'>
+            <h4>Highways greater than {this.state.highWayValue} miles</h4>
+            <Slider
+              classes={{ slider }}
+              value={this.state.highWayValue}
+              min={50}
+              max={300}
+              step={1}
+              onChange={this.handleHighWayChange}
+            />
+          </div>
         </div>
       </div>
     );

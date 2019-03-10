@@ -13,13 +13,19 @@
   bottom: 100px;
 }
 
-.footer {
+.switch-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: pink;
+  width: 100%;
+  margin-left: 10vw;
+  // margin-right: auto;
+}
 
+.footer {
   position: absolute;
   margin-right: auto;
   width: 30%;
-  padding-right: 5vw;
-  padding-left: 5vw;
 
   bottom: 0;
   height: 100px;
@@ -28,41 +34,53 @@
   text-align: center;
   margin-left: 25vw;
   margin-right: 25vw;
-  // display: flex;
-  // padding: 5vw;
+  padding-right: 5vw;
+  padding-left: 5vw;
 }
 
 .highway-footer {
   position: absolute;
   margin-left: auto;
-  width: 25%;
+  width: 30%;
   padding-left: 5vw;
+  padding-right: 5vw;
 
   bottom: 0;
   height: 100px;
   color: #0079c1;
   background-color: #ffffff;
   text-align: center;
-  // margin-left: 25vw;
-  // margin-right: 25vw;
-  // display: flex;
-  // padding: 5vw;
+
 }
 
 .sqmi-footer {
   position: absolute;
-  margin-right: auto;
-  width: 27%;
-  padding-left: 5vw;
-  right: 23vw;
+  width: 30%;
+  right: 10vw;
 
   bottom: 0;
   height: 100px;
   color: #0079c1;
   background-color: #ffffff;
   text-align: center;
-  // margin-left: 25vw;
-  // margin-right: 25vw;
-  // display: flex;
-  // padding: 5vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
 }
+
+// .sqmi-footer h4 {
+//   font-size: 14px;
+//   padding-top: 150px;
+//   color: black;
+// }
+
+// .highway-footer h4 {
+//   font-size: 14px;
+//   padding-top: 150px;
+//   color: black;
+// }
+
+// .footer h4 {
+//   font-size: 14px;
+//   padding-top: 150px;
+//   color: black;
+// }

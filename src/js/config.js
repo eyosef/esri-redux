@@ -8,7 +8,7 @@ export const INITIAL_STATE = {
 
 export const TEXT = {
   title: "Eden's Solution",
-  subtitle: 'Example with Redux, React, Esri, Sass, and more.'
+  subtitle: 'Leverages Material-UI Switch components and ArcGIS renderers for a custom solution'
 };
 
 export const MAP_OPTIONS = {
@@ -18,8 +18,8 @@ export const MAP_OPTIONS = {
 
 export const VIEW_OPTIONS = {
   ui: { components: ['logo', 'attribution'] },
-  center: [-76.9931, 38.9088],
-  zoom: 5
+  center: [-86.9931, 40.9088],
+  zoom: 4.3
 };
 
 export const URLS = {
@@ -27,24 +27,24 @@ export const URLS = {
 };
 
 export const citiesRenderer = {
-  type: "simple", // autocasts as new SimpleRenderer()
+  type: 'simple', // autocasts as new SimpleRenderer()
   symbol: {
-    type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+    type: 'simple-marker', // autocasts as new SimpleMarkerSymbol()
     size: 7,
     color: 'yellow',
-    style: "circle",
+    style: 'circle',
   },
-  label: "Cities"
+  label: 'Cities'
 };
 
     // size: 14,
     // color: {a: 1, b: 200, g: 0, r: 0},
 
 export const statesRenderer = {
-  type: "simple", // autocasts as new SimpleRenderer()
+  type: 'simple', // autocasts as new SimpleRenderer()
   symbol: {
-    type: "simple-fill", // autocasts as new SimpleFillSymbol()
-    style: "solid",
+    type: 'simple-fill', // autocasts as new SimpleFillSymbol()
+    style: 'solid',
     // color: 'pink',
     outline: {
       width: 2,
@@ -52,16 +52,16 @@ export const statesRenderer = {
       // color: {a: 1, b: 0, g: 200, r: 0}
     }
   },
-  label: "State boundaries"
+  label: 'State boundaries'
 };
 
 export const highwaysRenderer = {
-  type: "simple", // autocasts as new SimpleRenderer()
+  type: 'simple', // autocasts as new SimpleRenderer()
   symbol: {
-    type: "simple-line", // autocasts as new SimpleLineSymbol()
-    style: "solid",
+    type: 'simple-line', // autocasts as new SimpleLineSymbol()
+    style: 'solid',
     width: 1.5,
     color: {a: 1, b: 191, g: 74, r: 63}
   },
-  label: "Interstate highway"
+  label: 'Interstate highway'
 };
