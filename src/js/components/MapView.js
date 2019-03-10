@@ -148,8 +148,11 @@ export default class Map extends Component {
         </div>
 
         <div className='switch-wrapper'>
+          <div className='instr'>
+            <h3>Slide to Learn!</h3>
+          </div>
           <div className='sqmi-footer'>
-            <h4>States with > {this.state.popSquareMile} people per sq mi</h4>
+            <h4>States with at least {this.state.popSquareMile} people per mi²</h4>
             <Slider
               classes={{ slider }}
               value={this.state.popSquareMile}
@@ -161,7 +164,7 @@ export default class Map extends Component {
           </div>
 
           <div className='footer'>
-            <h4>City populations > {this.state.popValue} people</h4>
+            <h4>Cities with at least {this.state.popValue} people</h4>
             <Slider
               classes={{ slider }}
               value={this.state.popValue}
@@ -173,7 +176,7 @@ export default class Map extends Component {
           </div>
 
           <div className='highway-footer'>
-            <h4>Highways greater than {this.state.highWayValue} miles</h4>
+            <h4>Highways longer than {this.state.highWayValue} miles</h4>
             <Slider
               classes={{ slider }}
               value={this.state.highWayValue}

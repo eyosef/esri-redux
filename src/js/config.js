@@ -8,7 +8,7 @@ export const INITIAL_STATE = {
 
 export const TEXT = {
   title: "Eden's Solution",
-  subtitle: 'Leverages Material-UI Switch components and ArcGIS renderers for a custom solution'
+  subtitle: 'Leverages Material-UI Slider components and ArcGIS renderers for a custom solution'
 };
 
 export const MAP_OPTIONS = {

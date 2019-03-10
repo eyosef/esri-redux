@@ -11,15 +11,27 @@
   left: 0;
   top: 0;
   bottom: 100px;
+  border-radius: 2px;
 }
 
 .switch-wrapper {
   display: flex;
   flex-wrap: wrap;
-  background-color: pink;
   width: 100%;
   margin-left: 10vw;
-  // margin-right: auto;
+}
+
+.instr {
+  display: none;
+  z-index: 1;
+  height: 50px;
+  left: 0px;
+  position: absolute;
+  width: 30%;
+  bottom: 0;
+  color: #0079c1;
+  margin-bottom: 5vh;
+  margin-left: 1vw;
 }
 
 .footer {
@@ -36,6 +48,10 @@
   margin-right: 25vw;
   padding-right: 5vw;
   padding-left: 5vw;
+
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 2px;
 }
 
 .highway-footer {
@@ -51,6 +67,10 @@
   background-color: #ffffff;
   text-align: center;
 
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 2px;
+
 }
 
 .sqmi-footer {
@@ -65,7 +85,12 @@
   text-align: center;
   padding-left: 5vw;
   padding-right: 5vw;
+
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 2px;
 }
+
 
 // .sqmi-footer h4 {
 //   font-size: 14px;
