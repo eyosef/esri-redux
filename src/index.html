@@ -53,12 +53,24 @@
         parseOnLoad: false,
         async: true,
         packages: [
+          {
+          name: "react",
+          location: "https://unpkg.com/react@16/umd/",
+          main: "react.production.min"
+          }, 
+          {
+          name: "react-dom",
+          location: "https://unpkg.com/react-dom@16/umd/",
+          main: "react-dom.production.min"
+          },
           { name: 'js', location: makePath(base, 'js') }
         ],
         deps: ['dojo/domReady!'],
         callback: function () { require(['<%= htmlWebpackPlugin.files.js %>']); }
       };
+
     </script>
-    <script src='//js.arcgis.com/4.5/init.js' async></script>
+    /* <script src='//js.arcgis.com/4.5/init.js' async></script> */
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
   </body>
 </html>
