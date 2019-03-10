@@ -1,3 +1,4 @@
+
 export const INITIAL_STATE = {
   locateModalVisible: false,
   shareModalVisible: false,
@@ -11,14 +12,14 @@ export const TEXT = {
 };
 
 export const MAP_OPTIONS = {
-  basemap: 'streets-navigation-vector'
-  // basemap: 'dark-rrey'
+  // basemap: 'streets-navigation-vector'
+  basemap: 'gray'
 };
 
 export const VIEW_OPTIONS = {
   ui: { components: ['logo', 'attribution'] },
   center: [-76.9931, 38.9088],
-  zoom: 6
+  zoom: 5
 };
 
 export const URLS = {
@@ -29,22 +30,26 @@ export const citiesRenderer = {
   type: "simple", // autocasts as new SimpleRenderer()
   symbol: {
     type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-    size: 14,
-    color: {a: 1, b: 200, g: 0, r: 0},
-    style: "circle"
+    size: 7,
+    color: 'yellow',
+    style: "circle",
   },
   label: "Cities"
 };
+
+    // size: 14,
+    // color: {a: 1, b: 200, g: 0, r: 0},
 
 export const statesRenderer = {
   type: "simple", // autocasts as new SimpleRenderer()
   symbol: {
     type: "simple-fill", // autocasts as new SimpleFillSymbol()
     style: "solid",
-    color: {a: 1, b: 0, g: 0, r: 0},
+    // color: 'pink',
     outline: {
       width: 2,
-      color: {a: 1, b: 0, g: 200, r: 0}
+      color: 'black'
+      // color: {a: 1, b: 0, g: 200, r: 0}
     }
   },
   label: "State boundaries"
@@ -56,7 +61,7 @@ export const highwaysRenderer = {
     type: "simple-line", // autocasts as new SimpleLineSymbol()
     style: "solid",
     width: 1.5,
-    color: {a: 1, b: 100, g: 100, r: 100}
+    color: {a: 1, b: 191, g: 74, r: 63}
   },
   label: "Interstate highway"
 };
