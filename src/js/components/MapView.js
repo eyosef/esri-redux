@@ -23,7 +23,7 @@ export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      popValue: 1,
+      popValue: 2,
       highWayValue: 50,
       popSquareMile: 1,
       layer: new MapImageLayer({
@@ -148,11 +148,11 @@ export default class Map extends Component {
         </div>
 
         <div className='sqmi-footer'>
-          <h4>States with > {this.state.popSquareMile} people per square mile</h4>
+          <h4>States with > {this.state.popSquareMile} people per sq mi</h4>
           <Slider
             classes={{ slider }}
             value={this.state.popSquareMile}
-            min={100}
+            min={2}
             max={300}
             step={1}
             onChange={this.handlePopSqMileChange}
@@ -176,7 +176,7 @@ export default class Map extends Component {
           <Slider
             classes={{ slider }}
             value={this.state.highWayValue}
-            min={1}
+            min={50}
             max={300}
             step={1}
             onChange={this.handleHighWayChange}
