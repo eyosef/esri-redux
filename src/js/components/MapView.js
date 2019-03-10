@@ -1,5 +1,5 @@
 import { viewCreated } from 'js/actions/mapActions';
-import { MAP_OPTIONS, VIEW_OPTIONS } from 'js/config';
+import { MAP_OPTIONS, VIEW_OPTIONS, citiesRenderer, statesRenderer, highwaysRenderer } from 'js/config';
 
 import LocateModal from 'js/components/modals/Locate';
 import ShareModal from 'js/components/modals/Share';
@@ -31,45 +31,70 @@ export default class Map extends Component {
         basemap: 'dark-gray',
         url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer',
         sublayers: [
-          { // counties
-            id: 3,
-            visible: false
-          },
-          { // state borders
+          {
+            //https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/2
             id: 2,
-            visible: true
+            title: 'States',
+            visible: true,
+            renderer: statesRenderer,
+            popupTemplate: {
+              title: 'Welcome to {state_name}',
+              content: 'Population per square mile: {pop00_sqmi}'
+            }
           },
-          { // highways
+          {
+            // https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/1
             id: 1,
+            title: 'Highways',
             visible: true,
-            popupEnabled: true
+            renderer: highwaysRenderer,
+            popupTemplate: {
+              title: '{route}',
+              content: '{route} is {length} miles long'
+            }
           },
-          { //  cities
+          {
+            // https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/0
             id: 0,
+            title: 'Cities',
             visible: true,
-            popupEnabled: false,
-            autoOpenEnabled: false,
-            definitionExpression: 'pop2000 > 50000',
-            // popupTemplate: {
-            //   title: `${this.state.mapPoint}`,
-            //   content: `Latitude is: ${this.state.latitude} and longitude is: ${this.state.longitude}`
-            // }
+            renderer: citiesRenderer,
+            definitionExpression: 'pop2000 > 100000',
+            popupTemplate: {
+              title: '{areaname}',
+              content: '{pop2000} people call the city of {areaname}, {st} home'
+            }
           }
         ]
       }),
     };
-
-    this.popUpData = this.popUpData.bind(this);
   }
 
   componentDidMount() {
     // Subscribe to the store for updates
     this.unsubscribe = appStore.subscribe(this.storeDidUpdate);
 
+    // const layer_0 = new FeatureLayer({
+    //   url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/0",
+    //   title: "Cities"
+    // });
+    // const layer_1 = new FeatureLayer({
+    //   url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/1",
+    //   title: "Highways"
+    // });
+    // const layer_2 = new FeatureLayer({
+    //   url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/2",
+    //   title: "States"
+    // });
+    // const layer_3 = new FeatureLayer({
+    //   url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/3",
+    //   title: "Counties"
+    // });
+
     const map = new EsriMap(MAP_OPTIONS);
 
     map.add(this.state.layer);
-    // map.on('click', this.popUpData);
+    // map.addMany([layer_2, layer_3, layer_1, layer_0]);
 
     // Create our map view
     const promise = new MapView({
@@ -80,51 +105,10 @@ export default class Map extends Component {
 
     promise.then(view => {
       this.view = view;
-      this.view.popup.autoOpenEnabled = false;
-      this.view.on('click', this.popUpData);
       appStore.dispatch(viewCreated());
       //- Webmap from https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html
       // appStore.dispatch(getItemInfo('e691172598f04ea8881cd2a4adaa45ba'));
     });
-  }
-
-  popUpData(event) {
-    var locatorTask = new Locator({
-      url: "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
-    });
-    this.setState({
-      latitude: event.mapPoint.latitude,
-      longitude: event.mapPoint.longitude,
-      mapPoint: event.mapPoint,
-      layer: {
-          popupTemplate: {
-          title: 'Lat and Lon',
-          content: `Latitude is: ${this.state.latitude} and longitude is: ${this.state.longitude}`
-        },
-      }
-    });
-    var lat = Math.round(event.mapPoint.latitude * 1000) / 1000;
-    var lon = Math.round(event.mapPoint.longitude * 1000) / 1000;
-
-    this.view.popup.open({
-      title: `Latitude is: ${lat} and longitude is: ${lon}`,
-      content: `${event.mapPoint}`,
-      location: event.mapPoint
-    }).then(
-      locatorTask.locationToAddress(event.mapPoint).then(function(response) {
-        // If an address is successfully found, show it in the popup's content
-        this.view.popup.content = response.address;
-        console.log(`response.address = ${response.address}`);
-      }).catch(function(error) {
-        // If the promise fails and no result is found, show a generic message
-        this.view.popup.content =
-          `No address was found for this location due to ${error}`;
-      })
-    );
-
-    console.log(locatorTask.locationToAddress(this.state.mapPoint));
-
-    // debugger;
   }
 
   componentWillUnmount() {

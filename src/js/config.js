@@ -12,14 +12,51 @@ export const TEXT = {
 
 export const MAP_OPTIONS = {
   basemap: 'streets-navigation-vector'
+  // basemap: 'dark-rrey'
 };
 
 export const VIEW_OPTIONS = {
   ui: { components: ['logo', 'attribution'] },
   center: [-76.9931, 38.9088],
-  zoom: 8
+  zoom: 6
 };
 
 export const URLS = {
   itemInfo: appid => `//www.arcgis.com/sharing/rest/content/items/${appid}/data`
+};
+
+export const citiesRenderer = {
+  type: "simple", // autocasts as new SimpleRenderer()
+  symbol: {
+    type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+    size: 14,
+    color: {a: 1, b: 200, g: 0, r: 0},
+    style: "circle"
+  },
+  label: "Cities"
+};
+
+export const statesRenderer = {
+  type: "simple", // autocasts as new SimpleRenderer()
+  symbol: {
+    type: "simple-fill", // autocasts as new SimpleFillSymbol()
+    style: "solid",
+    color: {a: 1, b: 0, g: 0, r: 0},
+    outline: {
+      width: 2,
+      color: {a: 1, b: 0, g: 200, r: 0}
+    }
+  },
+  label: "State boundaries"
+};
+
+export const highwaysRenderer = {
+  type: "simple", // autocasts as new SimpleRenderer()
+  symbol: {
+    type: "simple-line", // autocasts as new SimpleLineSymbol()
+    style: "solid",
+    width: 1.5,
+    color: {a: 1, b: 100, g: 100, r: 100}
+  },
+  label: "Interstate highway"
 };
