@@ -24,6 +24,8 @@ export default class Map extends Component {
     super(props);
     this.state = {
       popValue: 1,
+      highWayValue: 50,
+      popSquareMile: 1,
       layer: new MapImageLayer({
         url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer',
         sublayers: [
@@ -33,6 +35,7 @@ export default class Map extends Component {
             title: 'States',
             visible: true,
             renderer: statesRenderer,
+            definitionExpression: 'pop00_sqmi > 100',
             popupTemplate: {
               title: 'Welcome to {state_name}',
               content: 'Population per square mile: {pop00_sqmi}'
@@ -44,7 +47,7 @@ export default class Map extends Component {
             title: 'Highways',
             visible: true,
             renderer: highwaysRenderer,
-            definitionExpression: 'length > 75',
+            definitionExpression: 'length > 50',
             popupTemplate: {
               title: '{route}',
               content: 'This {type} highway is {length} miles long'
@@ -73,47 +76,6 @@ export default class Map extends Component {
 
     const map = new EsriMap(MAP_OPTIONS);
 
-    // var layer = new MapImageLayer({
-    //   url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer',
-    //   sublayers: [
-    //     {
-    //       // https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/2
-    //       id: 2,
-    //       title: 'States',
-    //       visible: true,
-    //       renderer: statesRenderer,
-    //       popupTemplate: {
-    //         title: 'Welcome to {state_name}',
-    //         content: 'Population per square mile: {pop00_sqmi}'
-    //       }
-    //     },
-    //     {
-    //       // https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/1
-    //       id: 1,
-    //       title: 'Highways',
-    //       visible: true,
-    //       renderer: highwaysRenderer,
-    //       definitionExpression: 'length > 75',
-    //       popupTemplate: {
-    //         title: '{route}',
-    //         content: 'This {type} highway is {length} miles long'
-    //       }
-    //     },
-    //     {
-    //       // https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/0
-    //       id: 0,
-    //       title: 'Cities',
-    //       visible: true,
-    //       renderer: citiesRenderer,
-    //       definitionExpression: `pop2000 > ${this.state.popValue}`,
-    //       popupTemplate: {
-    //         title: '{areaname}',
-    //         content: '{pop2000} people live in {areaname}, {st}'
-    //       }
-    //     }
-    //   ]
-    // });
-
     map.add(this.state.layer);
 
     // Create our map view
@@ -141,12 +103,30 @@ export default class Map extends Component {
 
   handlePopChange = (event, value) => {
     this.setState({ popValue: value });
-    console.log(this.state.popValue);
+    // console.log(this.state.popValue);
+  }
+
+  handleHighWayChange = (event, value) => {
+    this.setState({ highWayValue: value });
+    // console.log(this.state.highWayValue);
+  }
+
+  handlePopSqMileChange = (event, value) => {
+    this.setState({ popSquareMile: value });
+    console.log(this.state.popSquareMile);
   }
 
   componentDidUpdate = () => {
     if (this.state.popValue) {
       this.state.layer.findSublayerById(0).definitionExpression = "pop2000 > " + this.state.popValue;
+    }
+    if (this.state.highWayValue) {
+      this.state.layer.findSublayerById(1).definitionExpression = "length > " + this.state.highWayValue;
+      // debugger;
+    }
+    if (this.state.popSquareMile) {
+      this.state.layer.findSublayerById(2).definitionExpression = "pop00_sqmi > " + this.state.popSquareMile;
+      // debugger;
     }
   }
 
@@ -167,8 +147,20 @@ export default class Map extends Component {
           <LocateModal visible={locateModalVisible} />
         </div>
 
+        <div className='sqmi-footer'>
+          <h4>States with > {this.state.popSquareMile} people per square mile</h4>
+          <Slider
+            classes={{ slider }}
+            value={this.state.popSquareMile}
+            min={100}
+            max={300}
+            step={1}
+            onChange={this.handlePopSqMileChange}
+          />
+        </div>
+
         <div className='footer'>
-          <h4>Interactive toolkit - City populations > {this.state.popValue} people</h4>
+          <h4>City populations > {this.state.popValue} people</h4>
           <Slider
             classes={{ slider }}
             value={this.state.popValue}
@@ -176,6 +168,18 @@ export default class Map extends Component {
             max={500000}
             step={1}
             onChange={this.handlePopChange}
+          />
+        </div>
+
+        <div className='highway-footer'>
+          <h4>Highways greater than {this.state.highWayValue} miles</h4>
+          <Slider
+            classes={{ slider }}
+            value={this.state.highWayValue}
+            min={1}
+            max={300}
+            step={1}
+            onChange={this.handleHighWayChange}
           />
         </div>
       </div>
@@ -186,3 +190,5 @@ export default class Map extends Component {
 // <h4>Cities with Population greater than <span className="total">100,000</span></h4>
 // <input className="population-slider" type="range" min="1000" max="1000000" step="100"
 // value="100000"></input>
+// <div className='highway-footer'>
+// </div>

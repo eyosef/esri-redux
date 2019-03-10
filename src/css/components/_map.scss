@@ -14,86 +14,55 @@
 }
 
 .footer {
+
   position: absolute;
+  margin-right: auto;
+  width: 30%;
+  padding-right: 5vw;
+  padding-left: 5vw;
+
   bottom: 0;
   height: 100px;
-  width: 50%;
   color: #0079c1;
   background-color: #ffffff;
   text-align: center;
   margin-left: 25vw;
   margin-right: 25vw;
+  // display: flex;
+  // padding: 5vw;
 }
 
-.population-slider {
-  -webkit-appearance: none;
-  height: 35px;
-  padding: 0;
-  width: 95%;
+.highway-footer {
+  position: absolute;
+  margin-left: auto;
+  width: 25%;
+  padding-left: 5vw;
+
+  bottom: 0;
+  height: 100px;
+  color: #0079c1;
+  background-color: #ffffff;
+  text-align: center;
+  // margin-left: 25vw;
+  // margin-right: 25vw;
+  // display: flex;
+  // padding: 5vw;
 }
 
-.population-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  box-sizing: content-box;
-  border: 12px solid #0079c1;
-  height: 8px;
-  width: 8px;
-  border-radius: 18px;
-  background-color: #fff;
-  cursor: ew-resize;
-  margin-top: -14px;
-  opacity: 0.7;
-}
+.sqmi-footer {
+  position: absolute;
+  margin-right: auto;
+  width: 27%;
+  padding-left: 5vw;
+  right: 23vw;
 
-.population-slider::-moz-range-thumb {
-  border: 12px solid #0079c1;
-  height: 8px;
-  width: 8px;
-  border-radius: 18px;
-  background-color: #fff;
-  cursor: ew-resize;
-  margin-top: -14px;
-  opacity: 0.7;
-}
-
-.population-slider::-ms-thumb {
-  display: inline-block;
-  border: 12px solid #0079c1;
-  height: 8px;
-  width: 8px;
-  border-radius: 18px;
-  background-color: #fff;
-  cursor: ew-resize;
-  margin-top: 5px; /* note: different margin-top for IE */
-}
-
-.population-slider::-webkit-slider-runnable-track {
-  height: 3px;
-  border-color: transparent;
-  color: transparent;
-  background-color: #cccccc;
-}
-
-.population-slider::-moz-range-track {
-  height: 3px;
-  background-color: #cccccc;
-}
-
-.population-slider::-ms-track {
-  border-color: transparent;
-  color: transparent;
-  height: 3px;
-  background-color: #cccccc;
-}
-
-.population-slider::-ms-fill-lower {
-  background-color: #0079c1;
-}
-
-.population-slider::-moz-range-progress {
-  background-color: #0079c1;
-}
-
-.population-slider::-ms-tooltip {
-  display: none;
+  bottom: 0;
+  height: 100px;
+  color: #0079c1;
+  background-color: #ffffff;
+  text-align: center;
+  // margin-left: 25vw;
+  // margin-right: 25vw;
+  // display: flex;
+  // padding: 5vw;
 }
