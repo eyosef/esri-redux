@@ -20,8 +20,11 @@ export default class Map extends Component {
     super(props);
     this.state = {
       popValue: 2,
+      renderPopValue: false,
       highWayValue: 50,
+      renderHighWayValue: false,
       popSquareMile: 2,
+      renderPopSquareMile: false,
       layer: new MapImageLayer({
         url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer',
         sublayers: [
@@ -31,7 +34,7 @@ export default class Map extends Component {
             title: 'States',
             visible: true,
             renderer: statesRenderer,
-            definitionExpression: 'pop00_sqmi > 100',
+            definitionExpression: 'pop00_sqmi > 2',
             popupTemplate: {
               title: 'Welcome to {state_name}',
               content: 'Population per square mile: {pop00_sqmi}'
@@ -55,7 +58,7 @@ export default class Map extends Component {
             title: 'Cities',
             visible: true,
             renderer: citiesRenderer,
-            definitionExpression: 'pop2000 > 1',
+            definitionExpression: 'pop2000 > 2',
             popupTemplate: {
               title: '{areaname}',
               content: '{pop2000} people live in {areaname}, {st}'
@@ -101,35 +104,45 @@ export default class Map extends Component {
   };
 
   handlePopChange = (event, value) => {
-    this.setState({ popValue: value });
-    // let popUserQuery = Object.assign({}, value);
-    // debugger;
-    // this.props.fetchCityPop(popUserQuery);
-
+    event.preventDefault();
+    // eslint-disable-next-line no-trailing-spaces
+    this.setState({ 
+      popValue: value,
+      renderPopValue: true
+    });
     // console.log(this.state.popValue);
   }
 
   handleHighWayChange = (event, value) => {
-    this.setState({ highWayValue: value });
+    event.preventDefault();
+    // eslint-disable-next-line no-trailing-spaces
+    this.setState({ 
+      highWayValue: value,
+      renderHighWayValue: true
+    });
     // console.log(this.state.highWayValue);
   }
 
   handlePopSqMileChange = (event, value) => {
-    this.setState({ popSquareMile: value });
-    console.log(this.state.popSquareMile);
+    event.preventDefault();
+    // eslint-disable-next-line no-trailing-spaces
+    this.setState({ 
+      popSquareMile: value,
+      renderPopSquareMile: true
+    });
+    // console.log(this.state.popSquareMile);
   }
 
   componentDidUpdate = () => {
-    if (this.state.popValue) {
+    if (this.state.renderPopValue === true) {
       this.state.layer.findSublayerById(0).definitionExpression = `pop2000 > ${this.state.popValue}`;
-    }
-    if (this.state.highWayValue) {
+      this.setState({ renderPopValue: false });
+    } else if (this.state.renderHighWayValue === true) {
       this.state.layer.findSublayerById(1).definitionExpression = `length >  ${this.state.highWayValue}`;
-      // debugger;
-    }
-    if (this.state.popSquareMile) {
+      this.setState({ renderHighWayValue: false });
+    } else if (this.state.renderPopSquareMile === true) {
       this.state.layer.findSublayerById(2).definitionExpression = `pop00_sqmi > ${this.state.popSquareMile}`;
-      // debugger;
+      this.setState({ renderPopSquareMile: false });
     }
   }
 

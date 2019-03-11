@@ -18,7 +18,7 @@ export const MAP_OPTIONS = {
 
 export const VIEW_OPTIONS = {
   ui: { components: ['logo', 'attribution'] },
-  center: [-86.9931, 40.9088],
+  center: [-94.9931, 40.9088],
   zoom: 4.3
 };
 
@@ -37,19 +37,14 @@ export const citiesRenderer = {
   label: 'Cities'
 };
 
-    // size: 14,
-    // color: {a: 1, b: 200, g: 0, r: 0},
-
 export const statesRenderer = {
   type: 'simple', // autocasts as new SimpleRenderer()
   symbol: {
     type: 'simple-fill', // autocasts as new SimpleFillSymbol()
     style: 'solid',
-    // color: 'pink',
     outline: {
       width: 2,
       color: 'black'
-      // color: {a: 1, b: 0, g: 200, r: 0}
     }
   },
   label: 'State boundaries'
