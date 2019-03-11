@@ -104,7 +104,6 @@ export default class Map extends Component {
   };
 
   handlePopChange = (event, value) => {
-    event.preventDefault();
     // eslint-disable-next-line no-trailing-spaces
     this.setState({ 
       popValue: value,
@@ -114,7 +113,6 @@ export default class Map extends Component {
   }
 
   handleHighWayChange = (event, value) => {
-    event.preventDefault();
     // eslint-disable-next-line no-trailing-spaces
     this.setState({ 
       highWayValue: value,
@@ -124,7 +122,6 @@ export default class Map extends Component {
   }
 
   handlePopSqMileChange = (event, value) => {
-    event.preventDefault();
     // eslint-disable-next-line no-trailing-spaces
     this.setState({ 
       popSquareMile: value,
