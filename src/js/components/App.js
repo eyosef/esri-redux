@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { TEXT } from 'js/config';
 
 export default class App extends Component {
-  displayName: 'App';
+  // displayName: 'App';
 
   render () {
     return (

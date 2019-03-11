@@ -9,7 +9,7 @@ const ZOOM_OUT_MARKUP = '<use xlink:href="#icon-zoom-out" />',
       SHARE_MARKUP = '<use xlink:href="#icon-share" />';
 
 export default class Controls extends Component {
-  displayName: 'Controls';
+  // displayName: 'Controls';
 
   zoomIn = () => {
     const {view} = this.props;

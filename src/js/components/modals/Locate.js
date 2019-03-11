@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import appStore from 'js/appStore';
 
 export default class LocateModal extends Component {
-  displayName: 'LocateModal';
+  // displayName: 'LocateModal';
 
   close = () => {
     appStore.dispatch(toggleLocateModal({ visible: false }));

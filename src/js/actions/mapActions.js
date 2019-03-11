@@ -28,3 +28,21 @@ export function getItemInfo (appid) {
     });
   };
 }
+
+
+export function fetchCityPop (popUserQuery) {
+  // debugger;
+  return (dispatch) => {
+    return fetch('https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer/0', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'},
+      body: JSON.stringify({citiesMatchPop: popUserQuery})})
+      .then(response => response.json())
+      .then(dryRedBottles => {
+        // console.log(dryRedBottles)
+        dispatch({ type: 'FETCH_DRY_REDS', dryRedBottles });
+      });
+  };
+}

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import appStore from 'js/appStore';
 
 export default class ShareModal extends Component {
-  displayName: 'ShareModal';
+  // displayName: 'ShareModal';
 
   close = () => {
     appStore.dispatch(toggleShareModal({ visible: false }));

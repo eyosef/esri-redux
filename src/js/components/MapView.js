@@ -1,13 +1,9 @@
 import { viewCreated } from 'js/actions/mapActions';
 import { MAP_OPTIONS, VIEW_OPTIONS, citiesRenderer, statesRenderer, highwaysRenderer } from 'js/config';
-
 import LocateModal from 'js/components/modals/Locate';
 import ShareModal from 'js/components/modals/Share';
 import Spinner from 'js/components/shared/Spinner';
 import Controls from 'js/components/Controls';
-
-// import Popup from 'esri/widgets/Popup';
-// import Locator from 'esri/tasks/Locator';
 import MapView from 'esri/views/MapView';
 import React, { Component } from 'react';
 import appStore from 'js/appStore';
@@ -59,7 +55,7 @@ export default class Map extends Component {
             title: 'Cities',
             visible: true,
             renderer: citiesRenderer,
-            definitionExpression: `pop2000 > 1`,
+            definitionExpression: 'pop2000 > 1',
             popupTemplate: {
               title: '{areaname}',
               content: '{pop2000} people live in {areaname}, {st}'
@@ -90,6 +86,9 @@ export default class Map extends Component {
       appStore.dispatch(viewCreated());
       //- Webmap from https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html
       // appStore.dispatch(getItemInfo('e691172598f04ea8881cd2a4adaa45ba'));
+    }).catch(err => {
+      // handle any errors
+      console.error(err);
     });
   }
 
@@ -103,6 +102,10 @@ export default class Map extends Component {
 
   handlePopChange = (event, value) => {
     this.setState({ popValue: value });
+    // let popUserQuery = Object.assign({}, value);
+    // debugger;
+    // this.props.fetchCityPop(popUserQuery);
+
     // console.log(this.state.popValue);
   }
 
@@ -118,14 +121,14 @@ export default class Map extends Component {
 
   componentDidUpdate = () => {
     if (this.state.popValue) {
-      this.state.layer.findSublayerById(0).definitionExpression = "pop2000 > " + this.state.popValue;
+      this.state.layer.findSublayerById(0).definitionExpression = `pop2000 > ${this.state.popValue}`;
     }
     if (this.state.highWayValue) {
-      this.state.layer.findSublayerById(1).definitionExpression = "length > " + this.state.highWayValue;
+      this.state.layer.findSublayerById(1).definitionExpression = `length >  ${this.state.highWayValue}`;
       // debugger;
     }
     if (this.state.popSquareMile) {
-      this.state.layer.findSublayerById(2).definitionExpression = "pop00_sqmi > " + this.state.popSquareMile;
+      this.state.layer.findSublayerById(2).definitionExpression = `pop00_sqmi > ${this.state.popSquareMile}`;
       // debugger;
     }
   }
@@ -192,8 +195,3 @@ export default class Map extends Component {
   }
 }
 
-// <h4>Cities with Population greater than <span className="total">100,000</span></h4>
-// <input className="population-slider" type="range" min="1000" max="1000000" step="100"
-// value="100000"></input>
-// <div className='highway-footer'>
-// </div>

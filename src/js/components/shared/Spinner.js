@@ -22,7 +22,7 @@ const STYLESHEET = {
 };
 
 export default class Spinner extends Component {
-  displayName: 'Spinner';
+  // displayName: 'Spinner';
 
   render () {
     let { backgroundColor, active, fill } = this.props;
