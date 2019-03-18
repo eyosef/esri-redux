@@ -32,3 +32,8 @@ export function getItemInfo (state = INITIAL_STATE.itemInfo, action) {
   const {type, data} = action;
   return type !== FETCH_ITEM_INFO ? state : data;
 }
+
+export function popDensity (state = 0, action) {
+  const {type, data} = action;
+  return type !== 'DENSITY' ? state : data;
+}

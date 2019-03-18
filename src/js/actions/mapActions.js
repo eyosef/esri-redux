@@ -10,6 +10,10 @@ export function viewCreated () {
   return { type: VIEW_READY };
 }
 
+export function popDensity (data) {
+  return { type: 'DENSITY', data }
+}
+
 export function toggleShareModal (data) {
   return { type: TOGGLE_SHARE, data };
 }

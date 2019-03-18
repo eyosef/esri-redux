@@ -1,4 +1,4 @@
-import { viewCreated } from 'js/actions/mapActions';
+import { viewCreated, popDensity } from 'js/actions/mapActions';
 import { MAP_OPTIONS, VIEW_OPTIONS, citiesRenderer, statesRenderer, highwaysRenderer } from 'js/config';
 import LocateModal from 'js/components/modals/Locate';
 import ShareModal from 'js/components/modals/Share';
@@ -15,16 +15,16 @@ export default class Map extends Component {
   // displayName: 'Map';
   state = appStore.getState();
   view = {};
+  highWayValue = 50; 
+  popValue = 2;
+  popSquareMile = 200;
 
   constructor(props) {
     super(props);
     this.state = {
-      popValue: 2,
-      renderPopValue: false,
-      highWayValue: 50,
-      renderHighWayValue: false,
-      popSquareMile: 2,
-      renderPopSquareMile: false,
+      popValue: this.popValue,
+      highWayValue: this.highWayValue,
+      popSquareMile: this.popSquareMile,
       layer: new MapImageLayer({
         url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/USA/MapServer',
         sublayers: [
@@ -34,7 +34,7 @@ export default class Map extends Component {
             title: 'States',
             visible: true,
             renderer: statesRenderer,
-            definitionExpression: 'pop00_sqmi > 2',
+            definitionExpression: `pop00_sqmi > ${this.popSquareMile}`,
             popupTemplate: {
               title: 'Welcome to {state_name}',
               content: 'Population per square mile: {pop00_sqmi}'
@@ -46,7 +46,7 @@ export default class Map extends Component {
             title: 'Highways',
             visible: true,
             renderer: highwaysRenderer,
-            definitionExpression: 'length > 50',
+            definitionExpression: `length > ${this.highWayValue}`,
             popupTemplate: {
               title: '{route}',
               content: 'This {type} highway is {length} miles long'
@@ -58,7 +58,7 @@ export default class Map extends Component {
             title: 'Cities',
             visible: true,
             renderer: citiesRenderer,
-            definitionExpression: 'pop2000 > 2',
+            definitionExpression: `pop2000 > ${this.popValue}`,
             popupTemplate: {
               title: '{areaname}',
               content: '{pop2000} people live in {areaname}, {st}'
@@ -106,41 +106,29 @@ export default class Map extends Component {
   handlePopChange = (event, value) => {
     // eslint-disable-next-line no-trailing-spaces
     this.setState({ 
-      popValue: value,
-      renderPopValue: true
+      popValue: value
     });
+    this.state.layer.findSublayerById(0).definitionExpression = `pop2000 > ${value}`;
     // console.log(this.state.popValue);
   }
 
   handleHighWayChange = (event, value) => {
     // eslint-disable-next-line no-trailing-spaces
     this.setState({ 
-      highWayValue: value,
-      renderHighWayValue: true
+      highWayValue: value
     });
+    this.state.layer.findSublayerById(1).definitionExpression = `length >  ${value}`;
     // console.log(this.state.highWayValue);
   }
 
   handlePopSqMileChange = (event, value) => {
     // eslint-disable-next-line no-trailing-spaces
     this.setState({ 
-      popSquareMile: value,
-      renderPopSquareMile: true
+      popSquareMile: value
     });
+    this.state.layer.findSublayerById(2).definitionExpression = `pop00_sqmi > ${value}`;
+    appStore.dispatch(popDensity(value));
     // console.log(this.state.popSquareMile);
-  }
-
-  componentDidUpdate = () => {
-    if (this.state.renderPopValue === true) {
-      this.state.layer.findSublayerById(0).definitionExpression = `pop2000 > ${this.state.popValue}`;
-      this.setState({ renderPopValue: false });
-    } else if (this.state.renderHighWayValue === true) {
-      this.state.layer.findSublayerById(1).definitionExpression = `length >  ${this.state.highWayValue}`;
-      this.setState({ renderHighWayValue: false });
-    } else if (this.state.renderPopSquareMile === true) {
-      this.state.layer.findSublayerById(2).definitionExpression = `pop00_sqmi > ${this.state.popSquareMile}`;
-      this.setState({ renderPopSquareMile: false });
-    }
   }
 
   render () {
@@ -169,7 +157,7 @@ export default class Map extends Component {
             <Slider
               classes={{ slider }}
               value={this.state.popSquareMile}
-              min={2}
+              min={0}
               max={300}
               step={1}
               onChange={this.handlePopSqMileChange}
@@ -181,7 +169,7 @@ export default class Map extends Component {
             <Slider
               classes={{ slider }}
               value={this.state.popValue}
-              min={2}
+              min={0}
               max={500000}
               step={1}
               onChange={this.handlePopChange}
@@ -193,7 +181,7 @@ export default class Map extends Component {
             <Slider
               classes={{ slider }}
               value={this.state.highWayValue}
-              min={50}
+              min={0}
               max={300}
               step={1}
               onChange={this.handleHighWayChange}
